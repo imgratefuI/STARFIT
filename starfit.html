@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STARFIT Kopřivnice | Moderní fitness centrum</title>
+  <meta name="description" content="Moderní fitness centrum STARFIT Kopřivnice. Silový trénink, kardio zóna, lekce, osobní trenéři a přátelská atmosféra." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" href="starfit.png" type="image/png">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            outfit: ['Outfit', 'sans-serif']
+          },
+          colors: {
+            star: {
+              red: '#ef233c',
+              redDark: '#b7071c',
+              dark: '#07080d',
+              card: '#11131b',
+              soft: '#181b26'
+            }
+          },
+          boxShadow: {
+            glow: '0 0 55px rgba(239, 35, 60, 0.35)',
+            softGlow: '0 25px 80px rgba(239, 35, 60, 0.18)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #07080d;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: #ef233c;
+      color: white;
+    }
+
+    .noise::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .08;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    .gradient-orb {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(70px);
+      opacity: .45;
+      animation: floatOrb 9s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatOrb {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to { transform: translate3d(30px, -40px, 0) scale(1.08); }
+    }
+
+    .hero-title span {
+      background: linear-gradient(90deg, #fff, #ef233c, #fff);
+      background-size: 220% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shine 5s linear infinite;
+    }
+
+    @keyframes shine {
+      to { background-position: 220% center; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity .85s ease, transform .85s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+
+    .hover-lift {
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease, background .35s ease;
+    }
+
+    .hover-lift:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 80px rgba(239,35,60,.18);
+      border-color: rgba(239,35,60,.45);
+    }
+
+    .magnetic-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .magnetic-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      transform: translateX(-120%);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+      transition: transform .75s ease;
+    }
+
+    .magnetic-btn:hover::before {
+      transform: translateX(120%);
+    }
+
+    .nav-link {
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -7px;
+      width: 0;
+      height: 2px;
+      background: #ef233c;
+      transition: width .28s ease;
+    }
+
+    .nav-link:hover::after { width: 100%; }
+
+    .marquee {
+      display: flex;
+      width: max-content;
+      animation: marquee 26s linear infinite;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .mobile-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .45s ease;
+    }
+
+    .mobile-panel.open { max-height: 760px; }
+
+    .parallax-img {
+      transform: translateY(var(--parallax, 0px));
+      transition: transform .08s linear;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="font-outfit text-white min-h-screen">
+
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-black/35 backdrop-blur-xl border-b border-white/10">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between gap-6">
+    <a href="starfit.html" class="flex items-center gap-3 group" aria-label="STARFIT domů">
+      <div class="bg-white rounded-2xl px-5 py-2 shadow-xl transition-transform duration-300 group-hover:scale-105">
+        <img src="logo_big.png" alt="STARFIT Logo" class="h-9 md:h-10">
+      </div>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold text-gray-200">
+      <div class="relative group py-3">
+        <button class="nav-link flex items-center gap-2 hover:text-white transition" type="button">
+          O nás <i class="fa-solid fa-chevron-down text-xs text-star-red"></i>
+        </button>
+        <div class="absolute left-0 top-full mt-3 w-60 opacity-0 invisible translate-y-3 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 bg-white text-gray-900 rounded-3xl shadow-2xl p-3">
+          <a href="treneri.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">Trenéři</a>
+          <a href="osobni-trener.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">Osobní trenér</a>
+          <a href="posilovaci-zona.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">Posilovací zóna</a>
+          <a href="kardio-zona.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">Kardio zóna</a>
+          <a href="trx.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">TRX</a>
+          <a href="bosu.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">Bosu</a>
+          <a href="steppery.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">Steppery</a>
+          <a href="rotopedy.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">Rotopedy</a>
+          <a href="bar.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">Bar</a>
+          <a href="box.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">Box</a>
+        </div>
+      </div>
+      <a href="galerie.html" class="nav-link hover:text-white transition">Galerie</a>
+      <a href="cenik.html" class="nav-link hover:text-white transition">Ceník</a>
+      <a href="kontakt.html" class="nav-link hover:text-white transition">Kontakt</a>
+      <a href="oteviraci-doba.html" class="nav-link hover:text-white transition">Otevírací doba</a>
+    </nav>
+
+    <div class="hidden lg:flex items-center gap-4">
+      <a href="https://www.facebook.com/StarFitFitnesskoprivnice" target="_blank" rel="noopener" class="w-11 h-11 rounded-full bg-white/10 hover:bg-star-red transition flex items-center justify-center text-xl" aria-label="Facebook">
+        <i class="fab fa-facebook"></i>
+      </a>
+      <a href="https://www.instagram.com/starfit.fitness/" target="_blank" rel="noopener" class="w-11 h-11 rounded-full bg-white/10 hover:bg-star-red transition flex items-center justify-center text-xl" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="#kontakt" class="magnetic-btn bg-star-red hover:bg-star-redDark transition px-6 py-3 rounded-full text-sm font-extrabold shadow-glow">
+        Přijít cvičit
+      </a>
+    </div>
+
+    <button id="menu-toggle" class="lg:hidden w-12 h-12 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-xl" aria-label="Otevřít menu">
+      <i id="menu-icon" class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="mobile-panel lg:hidden bg-black/95 backdrop-blur-xl border-t border-white/10">
+    <div class="px-6 py-6 space-y-4 text-lg font-semibold">
+      <details class="bg-white/5 border border-white/10 rounded-2xl p-4">
+        <summary class="cursor-pointer flex justify-between items-center">O nás <i class="fa-solid fa-chevron-down text-star-red"></i></summary>
+        <div class="mt-4 ml-2 space-y-3 text-base text-gray-300">
+          <a href="treneri.html" class="block">Trenéři</a>
+          <a href="osobni-trener.html" class="block">Osobní trenér</a>
+          <a href="posilovaci-zona.html" class="block">Posilovací zóna</a>
+          <a href="kardio-zona.html" class="block">Kardio zóna</a>
+          <a href="trx.html" class="block">TRX</a>
+          <a href="bosu.html" class="block">Bosu</a>
+          <a href="steppery.html" class="block">Steppery</a>
+          <a href="rotopedy.html" class="block">Rotopedy</a>
+          <a href="bar.html" class="block">Bar</a>
+          <a href="box.html" class="block">Box</a>
+        </div>
+      </details>
+      <a href="galerie.html" class="block bg-white/5 border border-white/10 rounded-2xl p-4">Galerie</a>
+      <a href="cenik.html" class="block bg-white/5 border border-white/10 rounded-2xl p-4">Ceník</a>
+      <a href="kontakt.html" class="block bg-white/5 border border-white/10 rounded-2xl p-4">Kontakt</a>
+      <a href="oteviraci-doba.html" class="block bg-white/5 border border-white/10 rounded-2xl p-4">Otevírací doba</a>
+      <a href="#kontakt" class="block text-center bg-star-red rounded-2xl p-4 shadow-glow">Kontaktovat nás</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="relative min-h-screen flex items-center overflow-hidden noise">
+    <div class="absolute inset-0">
+      <img src="posilovna1.jpg" alt="Fitness centrum STARFIT" class="parallax-img w-full h-[110%] object-cover opacity-80">
+      <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/35"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-star-dark via-transparent to-transparent"></div>
+    </div>
+
+    <div class="gradient-orb w-80 h-80 bg-star-red top-32 -right-20"></div>
+    <div class="gradient-orb w-72 h-72 bg-red-900 bottom-24 left-10 animation-delay-700"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6 md:px-8 pt-32 grid lg:grid-cols-2 gap-12 items-center">
+      <div class="reveal active">
+        <span class="inline-flex items-center gap-2 bg-white/10 border border-white/15 backdrop-blur-xl px-5 py-3 rounded-full text-sm text-gray-200 mb-7 shadow-xl">
+          <i class="fa-solid fa-location-dot text-star-red"></i>
+          Moderní fitness centrum v Kopřivnici
+        </span>
+
+        <h1 class="hero-title text-5xl sm:text-6xl md:text-8xl font-black leading-[0.95] tracking-tight mb-7">
+          Síla. Energie. <span>STARFIT.</span>
+        </h1>
+
+        <p class="text-lg md:text-2xl text-gray-300 max-w-2xl leading-relaxed mb-10">
+          Prostor pro silový trénink, kardio, vedené lekce i osobní tréninky. Přijď makat do prostředí, které tě nakopne.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="#kontakt" class="magnetic-btn bg-star-red hover:bg-star-redDark transition px-8 py-4 rounded-full font-extrabold text-center shadow-glow">
+            Začít trénovat
+          </a>
+          <a href="cenik.html" class="bg-white/10 hover:bg-white/20 border border-white/15 transition px-8 py-4 rounded-full font-extrabold text-center backdrop-blur">
+            Zobrazit ceník
+          </a>
+        </div>
+      </div>
+
+      <div class="hidden lg:flex justify-center reveal active reveal-delay-2">
+        <div class="relative">
+          <div class="absolute inset-0 bg-star-red blur-3xl opacity-30 rounded-full animate-pulse"></div>
+            <img src="logo_big.png" alt="STARFIT Logo" class="w-80 drop-shadow-2xl rotate-3">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative bg-black py-5 overflow-hidden border-y border-white/10">
+    <div class="marquee text-gray-400 font-bold uppercase tracking-[0.35em] text-sm">
+      <div class="flex gap-10 pr-10">
+        <span>Silový trénink</span><span class="text-star-red">★</span><span>Kardio</span><span class="text-star-red">★</span><span>TRX</span><span class="text-star-red">★</span><span>Bosu</span><span class="text-star-red">★</span><span>Osobní trenér</span><span class="text-star-red">★</span>
+      </div>
+      <div class="flex gap-10 pr-10">
+        <span>Silový trénink</span><span class="text-star-red">★</span><span>Kardio</span><span class="text-star-red">★</span><span>TRX</span><span class="text-star-red">★</span><span>Bosu</span><span class="text-star-red">★</span><span>Osobní trenér</span><span class="text-star-red">★</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 md:py-32 bg-star-dark relative overflow-hidden">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-star-red/20 rounded-full blur-3xl"></div>
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+        <span class="text-star-red font-extrabold uppercase tracking-[0.3em]">Co u nás najdeš</span>
+        <h2 class="text-4xl md:text-6xl font-black mt-4 mb-6">Trénink bez kompromisů</h2>
+        <p class="text-gray-400 text-lg">Moderní zázemí, funkční vybavení a atmosféra, která tě podrží i v těžkých sériích.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="reveal reveal-delay-1 hover-lift bg-star-card/90 border border-white/10 rounded-[2rem] p-8">
+          <div class="w-16 h-16 bg-star-red/15 text-star-red rounded-2xl flex items-center justify-center text-3xl mb-7">
+            <i class="fa-solid fa-dumbbell"></i>
+          </div>
+          <h3 class="text-2xl font-extrabold mb-3">Silová zóna</h3>
+          <p class="text-gray-400 leading-relaxed">Vybavení pro celé tělo, techniku, objem i kondici. Pro začátečníky i pokročilé.</p>
+        </article>
+
+        <article class="reveal reveal-delay-2 hover-lift bg-star-card/90 border border-white/10 rounded-[2rem] p-8">
+          <div class="w-16 h-16 bg-star-red/15 text-star-red rounded-2xl flex items-center justify-center text-3xl mb-7">
+            <i class="fa-solid fa-heart-pulse"></i>
+          </div>
+          <h3 class="text-2xl font-extrabold mb-3">Kardio zóna</h3>
+          <p class="text-gray-400 leading-relaxed">Pro spalování, vytrvalost, zahřátí i aktivní regeneraci po tréninku.</p>
+        </article>
+
+        <article class="reveal reveal-delay-3 hover-lift bg-star-card/90 border border-white/10 rounded-[2rem] p-8">
+          <div class="w-16 h-16 bg-star-red/15 text-star-red rounded-2xl flex items-center justify-center text-3xl mb-7">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+          <h3 class="text-2xl font-extrabold mb-3">Osobní přístup</h3>
+          <p class="text-gray-400 leading-relaxed">Pomoc s technikou, plánem, motivací i první návštěvou fitness centra.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 md:py-32 bg-gradient-to-b from-star-soft to-star-dark overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 md:px-8 grid lg:grid-cols-2 gap-16 items-center">
+      <div class="reveal">
+        <span class="text-star-red font-extrabold uppercase tracking-[0.3em]">O nás</span>
+        <h2 class="text-4xl md:text-6xl font-black mt-4 mb-8">Fitness centrum, kde se maká naplno</h2>
+        <p class="text-gray-300 text-lg leading-relaxed mb-6">
+          STARFIT je moderní fitness centrum pro indoor aktivity v Kopřivnici. Disponujeme širokou nabídkou vybavení pro kardio i silový trénink, doplňkovými pomůckami a individuálním přístupem našich trenérů.
+        </p>
+        <p class="text-gray-300 text-lg leading-relaxed mb-8">
+          Součástí jsou lekce TRX, bosu a další vedené kvalifikovanými instruktory. Náš tým vám pomůže s aklimatizací, ukázkami tréninku i poradenstvím.
+        </p>
+        <a href="treneri.html" class="inline-flex items-center gap-3 text-star-red font-extrabold hover:gap-5 transition-all">
+          Poznat trenéry <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-2 gap-5 reveal reveal-delay-2">
+        <div class="space-y-5 translate-y-10">
+          <div class="bg-white/5 border border-white/10 rounded-[2rem] p-6 hover-lift">
+            <div class="text-5xl font-black text-star-red counter" data-target="10">0</div>
+            <p class="text-gray-400 mt-2">tréninkových zón</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-[2rem] p-6 hover-lift">
+            <div class="text-5xl font-black text-star-red counter" data-target="100">0</div>
+            <p class="text-gray-400 mt-2">% motivace</p>
+          </div>
+        </div>
+        <div class="space-y-5">
+          <div class="bg-white/5 border border-white/10 rounded-[2rem] p-6 hover-lift">
+            <div class="text-5xl font-black text-star-red counter" data-target="4">0</div>
+            <p class="text-gray-400 mt-2">typy lekcí</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-[2rem] p-6 hover-lift">
+            <div class="text-5xl font-black text-star-red counter" data-target="1">0</div>
+            <p class="text-gray-400 mt-2">silná komunita</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 md:py-32 bg-star-dark">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14 reveal">
+        <div>
+          <span class="text-star-red font-extrabold uppercase tracking-[0.3em]">Zóny a lekce</span>
+          <h2 class="text-4xl md:text-6xl font-black mt-4">Vyber si svůj styl</h2>
+        </div>
+        <a href="galerie.html" class="bg-white/10 hover:bg-white/20 border border-white/10 px-6 py-4 rounded-full font-bold transition text-center">Zobrazit galerii</a>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <a href="posilovaci-zona.html" class="reveal hover-lift group relative min-h-72 bg-star-card border border-white/10 rounded-[2rem] overflow-hidden p-6 flex flex-col justify-end">
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-transparent z-10"></div>
+          <img src="posilovna1.jpg" alt="Posilovací zóna" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-70">
+          <div class="relative z-20"><h3 class="text-2xl font-black">Posilovací zóna</h3><p class="text-gray-300 mt-2">Síla, objem, technika.</p></div>
+        </a>
+        <a href="kardio-zona.html" class="reveal reveal-delay-1 hover-lift group relative min-h-72 bg-star-card border border-white/10 rounded-[2rem] overflow-hidden p-6 flex flex-col justify-end">
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-transparent z-10"></div>
+          <img src="posilovna1.jpg" alt="Kardio zóna" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-70">
+          <div class="relative z-20"><h3 class="text-2xl font-black">Kardio zóna</h3><p class="text-gray-300 mt-2">Kondice a vytrvalost.</p></div>
+        </a>
+        <a href="trx.html" class="reveal reveal-delay-2 hover-lift group relative min-h-72 bg-star-card border border-white/10 rounded-[2rem] overflow-hidden p-6 flex flex-col justify-end">
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-transparent z-10"></div>
+          <img src="posilovna1.jpg" alt="TRX" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-70">
+          <div class="relative z-20"><h3 class="text-2xl font-black">TRX</h3><p class="text-gray-300 mt-2">Funkční trénink těla.</p></div>
+        </a>
+        <a href="box.html" class="reveal reveal-delay-3 hover-lift group relative min-h-72 bg-star-card border border-white/10 rounded-[2rem] overflow-hidden p-6 flex flex-col justify-end">
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-transparent z-10"></div>
+          <img src="posilovna1.jpg" alt="Box" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-70">
+          <div class="relative z-20"><h3 class="text-2xl font-black">Box</h3><p class="text-gray-300 mt-2">Energie, dynamika, výkon.</p></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 md:py-32 bg-gradient-to-b from-star-soft to-black" id="kontakt">
+    <div class="max-w-7xl mx-auto px-6 md:px-8 grid lg:grid-cols-2 gap-14 items-start">
+      <div class="reveal">
+        <span class="text-star-red font-extrabold uppercase tracking-[0.3em]">Kontakt</span>
+        <h2 class="text-4xl md:text-6xl font-black mt-4 mb-7">Napiš nám nebo se rovnou stav</h2>
+        <p class="text-gray-400 text-lg leading-relaxed mb-10 max-w-xl">Máš otázku k tréninku, cenám nebo první návštěvě? Ozvi se nám a rádi poradíme.</p>
+
+        <div class="space-y-5 text-lg">
+          <a href="tel:+420773266789" class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-star-red/50 transition">
+            <span class="w-12 h-12 bg-star-red/15 text-star-red rounded-xl flex items-center justify-center"><i class="fas fa-phone-alt"></i></span>
+            <span>773 266 789</span>
+          </a>
+          <a href="mailto:starfit1477@seznam.cz" class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-star-red/50 transition">
+            <span class="w-12 h-12 bg-star-red/15 text-star-red rounded-xl flex items-center justify-center"><i class="fas fa-envelope"></i></span>
+            <span>starfit1477@seznam.cz</span>
+          </a>
+        </div>
+
+        <div class="flex gap-4 mt-8">
+          <a href="https://www.facebook.com/StarFitFitnesskoprivnice" target="_blank" rel="noopener" class="w-14 h-14 rounded-full bg-white/10 hover:bg-star-red transition flex items-center justify-center text-2xl" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="https://www.instagram.com/starfit.fitness/" target="_blank" rel="noopener" class="w-14 h-14 rounded-full bg-white/10 hover:bg-star-red transition flex items-center justify-center text-2xl" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <form class="reveal reveal-delay-2 bg-star-card border border-white/10 rounded-[2rem] p-6 md:p-8 shadow-2xl space-y-5">
+        <div>
+          <label class="block text-sm font-bold mb-2">Jméno</label>
+          <input type="text" required placeholder="Vaše jméno" class="w-full bg-white/10 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-star-red transition placeholder:text-gray-500">
+        </div>
+        <div>
+          <label class="block text-sm font-bold mb-2">Email</label>
+          <input type="email" required placeholder="vas@email.cz" class="w-full bg-white/10 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-star-red transition placeholder:text-gray-500">
+        </div>
+        <div>
+          <label class="block text-sm font-bold mb-2">Zpráva</label>
+          <textarea required placeholder="S čím vám můžeme pomoct?" class="w-full h-40 bg-white/10 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-star-red transition resize-none placeholder:text-gray-500"></textarea>
+        </div>
+        <button type="submit" class="magnetic-btn w-full bg-star-red hover:bg-star-redDark transition py-4 rounded-2xl font-black shadow-glow">
+          Odeslat zprávu
+        </button>
+        <p class="text-xs text-gray-500 text-center">Formulář je připravený pro napojení na backend / e-mailovou službu.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="relative bg-black border-t border-white/10 py-10 overflow-hidden">
+  <div class="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[36rem] h-[36rem] bg-star-red/10 rounded-full blur-3xl"></div>
+  <div class="relative max-w-7xl mx-auto px-6 md:px-8 flex flex-col md:flex-row justify-between items-center gap-5 text-sm text-gray-400">
+    <p>&copy; 2026 STARFIT Kopřivnice. Všechna práva vyhrazena.</p>
+    <div class="flex items-center gap-5">
+      <a href="galeri.html" class="hover:text-white transition">Galerie</a>
+      <a href="cenik.html" class="hover:text-white transition">Ceník</a>
+      <a href="kontakt.html" class="hover:text-white transition">Kontakt</a>
+    </div>
+    <p>Vytvořeno s ❤️ pro lepší trénink.</p>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('site-header');
+  const menuToggle = document.getElementById('menu-toggle');
+  const menuIcon = document.getElementById('menu-icon');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const parallaxImage = document.querySelector('.parallax-img');
+
+  menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+    menuIcon.classList.toggle('fa-bars');
+    menuIcon.classList.toggle('fa-xmark');
+  });
+
+  document.querySelectorAll('#mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      menuIcon.classList.add('fa-bars');
+      menuIcon.classList.remove('fa-xmark');
+    });
+  });
+
+  const revealElements = document.querySelectorAll('.reveal');
+  const counters = document.querySelectorAll('.counter');
+  const animatedCounters = new WeakSet();
+
+  const animateCounter = (counter) => {
+    const target = Number(counter.dataset.target || 0);
+    const duration = 1200;
+    const startTime = performance.now();
+
+    const update = (time) => {
+      const progress = Math.min((time - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      counter.textContent = Math.round(target * eased);
+      if (progress < 1) requestAnimationFrame(update);
+      else counter.textContent = target;
+    };
+
+    requestAnimationFrame(update);
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+
+        if (entry.target.classList.contains('counter') && !animatedCounters.has(entry.target)) {
+          animatedCounters.add(entry.target);
+          animateCounter(entry.target);
+        }
+      }
+    });
+  }, { threshold: 0.18 });
+
+  revealElements.forEach(element => observer.observe(element));
+  counters.forEach(counter => observer.observe(counter));
+
+  const handleScroll = () => {
+    const y = window.scrollY;
+
+    if (y > 20) {
+      header.classList.add('bg-black/85', 'shadow-2xl');
+      header.classList.remove('bg-black/35');
+    } else {
+      header.classList.remove('bg-black/85', 'shadow-2xl');
+      header.classList.add('bg-black/35');
+    }
+
+    if (parallaxImage) {
+      parallaxImage.style.setProperty('--parallax', `${Math.min(y * 0.16, 90)}px`);
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
+</script>
+
+</body>
+</html>
