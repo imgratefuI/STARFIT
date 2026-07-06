@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt – STARFIT Kopřivnice</title>
+  <meta name="description" content="Kontakt na fitness centrum STARFIT Kopřivnice. Telefon, e-mail, adresa, kontaktní formulář a mapa." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" href="starfit.png" type="image/png">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            outfit: ['Outfit', 'sans-serif']
+          },
+          colors: {
+            star: {
+              red: '#ef233c',
+              redDark: '#b7071c',
+              dark: '#07080d',
+              card: '#11131b',
+              soft: '#181b26'
+            }
+          },
+          boxShadow: {
+            glow: '0 0 55px rgba(239, 35, 60, 0.35)',
+            softGlow: '0 25px 80px rgba(239, 35, 60, 0.18)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #07080d;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: #ef233c;
+      color: white;
+    }
+
+    .nav-link {
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -7px;
+      width: 0;
+      height: 2px;
+      background: #ef233c;
+      transition: width .28s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .mobile-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .45s ease;
+    }
+
+    .mobile-panel.open {
+      max-height: 760px;
+    }
+
+    .magnetic-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .magnetic-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      transform: translateX(-120%);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+      transition: transform .75s ease;
+    }
+
+    .magnetic-btn:hover::before {
+      transform: translateX(120%);
+    }
+  </style>
+</head>
+
+<body class="font-outfit text-white min-h-screen flex flex-col">
+
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-black/85 backdrop-blur-xl border-b border-white/10 shadow-2xl">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between gap-6">
+    <a href="starfit.html" class="flex items-center gap-3 group" aria-label="STARFIT domů">
+      <div class="bg-white rounded-2xl px-5 py-2 shadow-xl transition-transform duration-300 group-hover:scale-105">
+        <img src="starfit.png" alt="STARFIT Logo" class="h-9 md:h-10">
+      </div>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold text-gray-200">
+      <div class="relative group py-3">
+        <button class="nav-link flex items-center gap-2 hover:text-white transition" type="button">
+          O nás <i class="fa-solid fa-chevron-down text-xs text-star-red"></i>
+        </button>
+        <div class="absolute left-0 top-full mt-3 w-60 opacity-0 invisible translate-y-3 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 bg-white text-gray-900 rounded-3xl shadow-2xl p-3">
+          <a href="treneri.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">Trenéři</a>
+          <a href="osobni-trener.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">Osobní trenér</a>
+          <a href="posilovaci-zona.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">Posilovací zóna</a>
+          <a href="kardio-zona.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">Kardio zóna</a>
+          <a href="trx.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">TRX</a>
+          <a href="bosu.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">Bosu</a>
+          <a href="steppery.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">Steppery</a>
+          <a href="rotopedy.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">Rotopedy</a>
+          <a href="bar.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">Bar</a>
+          <a href="box.html" class="block px-4 py-3 rounded-2xl hover:bg-gray-100">Box</a>
+        </div>
+      </div>
+      <a href="galerie.html" class="nav-link hover:text-white transition">Galerie</a>
+      <a href="cenik.html" class="nav-link hover:text-white transition">Ceník</a>
+      <a href="kontakt.html" class="nav-link active text-white transition">Kontakt</a>
+      <a href="oteviraci-doba.html" class="nav-link hover:text-white transition">Otevírací doba</a>
+    </nav>
+
+    <div class="hidden lg:flex items-center gap-4">
+      <a href="https://www.facebook.com/StarFitFitnesskoprivnice" target="_blank" rel="noopener" class="w-11 h-11 rounded-full bg-white/10 hover:bg-star-red transition flex items-center justify-center text-xl" aria-label="Facebook">
+        <i class="fab fa-facebook"></i>
+      </a>
+      <a href="https://www.instagram.com/starfit.fitness/" target="_blank" rel="noopener" class="w-11 h-11 rounded-full bg-white/10 hover:bg-star-red transition flex items-center justify-center text-xl" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+
+    <button id="menu-toggle" class="lg:hidden w-12 h-12 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-xl" aria-label="Otevřít menu">
+      <i id="menu-icon" class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="mobile-panel lg:hidden bg-black/95 backdrop-blur-xl border-t border-white/10">
+    <div class="px-6 py-6 space-y-4 text-lg font-semibold">
+      <details class="bg-white/5 border border-white/10 rounded-2xl p-4">
+        <summary class="cursor-pointer flex justify-between items-center">O nás <i class="fa-solid fa-chevron-down text-star-red"></i></summary>
+        <div class="mt-4 ml-2 space-y-3 text-base text-gray-300">
+          <a href="treneri.html" class="block">Trenéři</a>
+          <a href="osobni-trener.html" class="block">Osobní trenér</a>
+          <a href="posilovaci-zona.html" class="block">Posilovací zóna</a>
+          <a href="kardio-zona.html" class="block">Kardio zóna</a>
+          <a href="trx.html" class="block">TRX</a>
+          <a href="bosu.html" class="block">Bosu</a>
+          <a href="steppery.html" class="block">Steppery</a>
+          <a href="rotopedy.html" class="block">Rotopedy</a>
+          <a href="bar.html" class="block">Bar</a>
+          <a href="box.html" class="block">Box</a>
+        </div>
+      </details>
+      <a href="galerie.html" class="block bg-white/5 border border-white/10 rounded-2xl p-4">Galerie</a>
+      <a href="cenik.html" class="block bg-white/5 border border-white/10 rounded-2xl p-4">Ceník</a>
+      <a href="kontakt.html" class="block bg-star-red rounded-2xl p-4 shadow-glow">Kontakt</a>
+      <a href="oteviraci-doba.html" class="block bg-white/5 border border-white/10 rounded-2xl p-4">Otevírací doba</a>
+    </div>
+  </div>
+</header>
+
+<main class="flex-grow pt-28">
+  <section class="py-14 md:py-20 bg-star-dark relative overflow-hidden">
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-star-red/15 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-44 -left-44 w-96 h-96 bg-star-red/10 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-6xl mx-auto px-6 md:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-star-red font-extrabold uppercase tracking-[0.3em]">STARFIT Kopřivnice</span>
+        <h1 class="text-4xl md:text-6xl font-black mt-4 mb-5">Kontakt</h1>
+        <p class="text-gray-400 text-lg">Máš otázku k tréninku, cenám nebo první návštěvě? Ozvi se nám.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6 items-start">
+        <div class="bg-star-card border border-white/10 rounded-[2rem] p-6 md:p-8 shadow-2xl">
+          <h2 class="text-2xl font-black mb-6">Kontaktní údaje</h2>
+
+          <div class="space-y-4 text-lg">
+            <a href="https://www.google.com/maps/search/?api=1&query=Z%C3%A1humenn%C3%AD+1477+Kop%C5%99ivnice" target="_blank" rel="noopener" class="flex gap-4 bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-star-red/50 transition">
+              <span class="w-12 h-12 shrink-0 bg-star-red/15 text-star-red rounded-xl flex items-center justify-center"><i class="fas fa-map-marker-alt"></i></span>
+              <span>Záhumenní 1477 (5. patro)<br><span class="text-gray-400">742 21 Kopřivnice</span></span>
+            </a>
+
+            <a href="tel:+420773266789" class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-star-red/50 transition">
+              <span class="w-12 h-12 shrink-0 bg-star-red/15 text-star-red rounded-xl flex items-center justify-center"><i class="fas fa-phone-alt"></i></span>
+              <span>773 266 789</span>
+            </a>
+
+            <a href="mailto:starfit1477@seznam.cz" class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-star-red/50 transition">
+              <span class="w-12 h-12 shrink-0 bg-star-red/15 text-star-red rounded-xl flex items-center justify-center"><i class="fas fa-envelope"></i></span>
+              <span>starfit1477@seznam.cz</span>
+            </a>
+          </div>
+
+          <div class="flex items-center gap-4 mt-7">
+            <a href="https://www.facebook.com/StarFitFitnesskoprivnice" target="_blank" rel="noopener" class="w-14 h-14 rounded-full bg-white/10 hover:bg-star-red transition flex items-center justify-center text-2xl" aria-label="Facebook">
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/starfit.fitness/" target="_blank" rel="noopener" class="w-14 h-14 rounded-full bg-white/10 hover:bg-star-red transition flex items-center justify-center text-2xl" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+
+        <form class="bg-star-card border border-white/10 rounded-[2rem] p-6 md:p-8 shadow-2xl space-y-5">
+          <h2 class="text-2xl font-black mb-2">Napiš nám</h2>
+
+          <div>
+            <label class="block text-sm font-bold mb-2">Jméno</label>
+            <input type="text" required placeholder="Vaše jméno" class="w-full bg-white/10 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-star-red transition placeholder:text-gray-500">
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold mb-2">Email</label>
+            <input type="email" required placeholder="vas@email.cz" class="w-full bg-white/10 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-star-red transition placeholder:text-gray-500">
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold mb-2">Zpráva</label>
+            <textarea required placeholder="S čím vám můžeme pomoct?" class="w-full h-36 bg-white/10 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-star-red transition resize-none placeholder:text-gray-500"></textarea>
+          </div>
+
+          <button type="submit" class="magnetic-btn w-full bg-star-red hover:bg-star-redDark transition py-4 rounded-2xl font-black shadow-glow">
+            Odeslat zprávu
+          </button>
+        </form>
+      </div>
+
+      <div class="mt-8 bg-star-card border border-white/10 rounded-[2rem] p-4 md:p-6 shadow-2xl overflow-hidden">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-5">
+          <h2 class="text-2xl font-black">Kde nás najdete</h2>
+          <p class="text-gray-400">Záhumenní 1477, Kopřivnice</p>
+        </div>
+        <div class="rounded-[1.5rem] overflow-hidden border border-white/10">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2340.10255062722!2d18.139583076007316!3d49.59968244825545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4713ed6057fd3c2b%3A0xd701bf4b778e89f2!2sStar%20Fit%20fitness%20centrum!5e1!3m2!1scs!2scz!4v1752070928409!5m2!1scs!2scz" width="100%" height="420" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="relative bg-black border-t border-white/10 py-10 overflow-hidden">
+  <div class="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[36rem] h-[36rem] bg-star-red/10 rounded-full blur-3xl"></div>
+  <div class="relative max-w-7xl mx-auto px-6 md:px-8 flex flex-col md:flex-row justify-between items-center gap-5 text-sm text-gray-400">
+    <p>&copy; 2026 STARFIT Kopřivnice. Všechna práva vyhrazena.</p>
+    <div class="flex items-center gap-5">
+      <a href="galerie.html" class="hover:text-white transition">Galerie</a>
+      <a href="cenik.html" class="hover:text-white transition">Ceník</a>
+      <a href="kontakt.html" class="hover:text-white transition">Kontakt</a>
+    </div>
+    <p>Vytvořeno s ❤️ pro lepší trénink.</p>
+  </div>
+</footer>
+
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const menuIcon = document.getElementById('menu-icon');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+    menuIcon.classList.toggle('fa-bars');
+    menuIcon.classList.toggle('fa-xmark');
+  });
+
+  document.querySelectorAll('#mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      menuIcon.classList.add('fa-bars');
+      menuIcon.classList.remove('fa-xmark');
+    });
+  });
+</script>
+
+</body>
+</html>
